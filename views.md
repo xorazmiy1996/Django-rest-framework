@@ -1,0 +1,1 @@
+### 1. `HTTP` metodlarini cheklash (Agar bitta Viewda qilish zarur bo'lsa)
