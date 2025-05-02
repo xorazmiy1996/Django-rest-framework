@@ -1,3 +1,5 @@
+from rest_framework.permissions import AllowAny
+
 from .models import User, UserBalance, Transaction
 from .serializers import PaymentSerializer
 from django.db import transaction
@@ -10,6 +12,7 @@ from .serializers import UserSerializer
 
 
 class UserListCreateView(APIView):
+    permission_classes = (AllowAny,)
     # 1. GET - Barcha user larni olish
     def get(self, request):
         user = User.objects.all()

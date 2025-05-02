@@ -86,14 +86,30 @@ WSGI_APPLICATION = 'tutorial.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'rest_framework_db',
-        'USER': 'test',
-        'PASSWORD': '123',
-        'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'django_db',
+        'USER': 'myuser',
+        'PASSWORD': 'Test@#$8450',
+        'HOST': '34.29.123.7',
         'PORT': '5432',
+        # Qo'shimcha sozlamalar
+        'OPTIONS': {
+            'options': '-c search_path=public'  # Schema ni aniq belgilash
+        },
     }
 }
+
+# local postgres uchun
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'rest_framework_db',
+#         'USER': 'test',
+#         'PASSWORD': '123',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
