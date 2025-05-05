@@ -12,6 +12,6 @@ CMD gunicorn \
   --bind=0.0.0.0:8000 \
   --max-requests=1000 \
   --timeout=25 \
-  --preload_app \
+  --preload \
   tutorial.wsgi:application
 
