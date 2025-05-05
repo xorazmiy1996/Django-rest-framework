@@ -4,4 +4,14 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir  --upgrade -r requirements.txt
 RUN apk update && apk add curl
 COPY . .
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "8","--threads", "2", "tutorial.wsgi:application"]
+
+CMD gunicorn \
+  --workers=16 \
+  --threads=4 \
+  --worker-class=gthread \
+  --bind=0.0.0.0:8000 \
+  --timeout=2000 \
+  --max-requests=1000 \
+  --preload \
+  tutorial.wsgi:application
+
