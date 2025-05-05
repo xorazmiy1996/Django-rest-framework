@@ -6,12 +6,12 @@ RUN apk update && apk add curl
 COPY . .
 
 CMD gunicorn \
-  --workers=16 \
-  --threads=4 \
+  --workers=5 \
+  --threads=3 \
   --worker-class=gthread \
   --bind=0.0.0.0:8000 \
-  --timeout=2000 \
   --max-requests=1000 \
-  --preload \
+  --timeout=25 \
+  --preload_app \
   tutorial.wsgi:application
 
