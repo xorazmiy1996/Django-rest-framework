@@ -91,7 +91,11 @@ class UserDestroyUpdatePatchDeleteAPIView(APIView):
 class PaymentView(APIView):
     @extend_schema(
         request=PaymentSerializer,
-        responses={200: PaymentSerializer},
+        responses={
+            200: PaymentSerializer,
+            400: {"description": "Invalid input"},
+            404: {"description": "User balance not found"}
+        },
     )
     def post(self, request):
         serializer = PaymentSerializer(data=request.data)
@@ -100,9 +104,11 @@ class PaymentView(APIView):
         try:
             with transaction.atomic():
                 # Balansni yangilash
-                user_balance = UserBalance.objects.select_for_update().get(user=request.user)
+                user_balance = UserBalance.objects.select_for_update().only(
+                    'main_balance'
+                ).get(user_id=request.user.id)
                 user_balance.main_balance += serializer.validated_data['amount']
-                user_balance.save()
+                user_balance.save(update_fields=['main_balance'])
 
                 # Tranzaksiyani yaratish
                 Transaction.objects.create(
