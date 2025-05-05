@@ -28,7 +28,7 @@ DEBUG = False
 
 # ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
-ALLOWED_HOSTS = ['35.225.17.227','test-uchun.uz','www.test-uchun.uz']
+ALLOWED_HOSTS = ['35.226.152.177']
 
 # Application definition
 
