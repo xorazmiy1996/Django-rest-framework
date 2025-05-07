@@ -7,7 +7,7 @@ COPY . .
 
 CMD gunicorn \
   --workers=5 \
-  --threads=3 \
+  --threads=30 \
   --worker-class=gthread \
   --bind=0.0.0.0:8000 \
   --max-requests=1000 \
