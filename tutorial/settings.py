@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-s5t4fnp$rulg24^v1v@x)u0@5583lb%jt%jg-b7*k$-s^lb*cr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-# ALLOWED_HOSTS = ['localhost','127.0.0.1']
+ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
-ALLOWED_HOSTS = ['35.194.106.39','test-uchun.uz']
+# ALLOWED_HOSTS = ['35.194.106.39','test-uchun.uz']
 
 # Application definition
 
@@ -193,4 +193,5 @@ SIMPLE_JWT = {
 
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',
+    'TOKEN_OBTAIN_SERIALIZER': 'user.serializers.CustomTokenObtainPairSerializer',
 }
