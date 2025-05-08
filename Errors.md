@@ -1,15 +1,29 @@
 ### 1. Django-REST-Framework da qilinga barcha API larim uzoq vaqtda ishlayapti:
 
+
+
 `Misol uchun`:
 
-- **Serverdagi vaqtlar:**
-    - `http://35.194.106.39:8000/token/` - **x-latency: `1.691 seconds`**
-    - `http://35.194.106.39:8000/users/` - **x-latency: `1.129 seconds`**
-    - `http://35.194.106.39:8000/payment/` - **x-latency: `1.658 seconds`**
-- **Local kompyuterdag vaqtlar:**
-    - `http://127.0.0.1:8000/token/` - **x-latency: `2.226 seconds`**
-    - `http://127.0.0.1:8000/users/` - **x-latency: `1.993 seconds`**
-    - `http://127.0.0.1:8000/payment/` - **x-latency: `2.930 seconds`**
+1. **Loyihani yuqoridagi 2 ta serverda sinaganimda:**
+   Menda ikkit server bor, har bir `server` `8vCPU(4 core) 16 GB RAM` ga ega. Bu serverlar turli joyda joylashgan.
+   `Django-REST-Framwork` loyihamni birinchi serverda `run` qildim, `PostgreSQL` ni boshq serverda `run` bo'lganida
+   - `http://35.194.106.39:8000/token/` - **x-latency: `1.691 seconds`**
+   - `http://35.194.106.39:8000/users/` - **x-latency: `1.129 seconds`**
+   - `http://35.194.106.39:8000/payment/` - **x-latency: `1.658 seconds`**
+
+2. **Local kompyuterda vaqtlar:**
+   `Django-REST-Framwork` loyihamni o'zimnin shaxsiy kimpyuterimda `run` qildim, `PostgreSQL` ni yuqoridagi xarakteristikaga ega serverda `run` bo'lganida 
+   - `http://127.0.0.1:8000/token/` - **x-latency: `2.226 seconds`**
+   - `http://127.0.0.1:8000/users/` - **x-latency: `1.993 seconds`**
+   - `http://127.0.0.1:8000/payment/` - **x-latency: `2.930 seconds`**
+
+3. **`Django-REST-Framwork` va `PostgreSQL` ni o'zimnin shaxsiy kimpyuterimda `run` qilganimdagi vaqtlar :**
+  **Mening shaxsiy kompyuterim xarakteristikasi:** `AMD Ryzen 5 6600H with Radeon Graphics 3.30 GHz` `16.0 GB (15.2 GB usable)`
+   - `http://127.0.0.1:8000/token/` - **x-latency: `0.459 seconds`**
+   - `http://127.0.0.1:8000/users/` - **x-latency: `0.044 seconds`**
+   - `http://127.0.0.1:8000/payment/` - **x-latency: `0.049 seconds`**
+
+
 
 **Mening kompyuterimning Konfiguratsiyasi uchun optimal `Latency`:**
 
