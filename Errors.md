@@ -22,7 +22,10 @@
    - `http://127.0.0.1:8000/token/` - **x-latency: `0.459 seconds`**
    - `http://127.0.0.1:8000/users/` - **x-latency: `0.044 seconds`**
    - `http://127.0.0.1:8000/payment/` - **x-latency: `0.049 seconds`**
-
+4. `Django-REST-Framework` loyihasini va `PostgreSQL` ni bita serverda local bog'lanish orqali run qilganimda.(`Server` harakteristikasi yuqoridagi serverlar bilan bir hil)
+   - `http://35.194.106.39:8000/token/` - **x-latency: `0.574 seconds`**
+   - `http://35.194.106.39:8000/users/` - **x-latency: `0.024 seconds`**
+   - `http://35.194.106.39:8000/payment/` - **x-latency: `0.030 seconds`**
 
 
 **Mening kompyuterimning Konfiguratsiyasi uchun optimal `Latency`:**
