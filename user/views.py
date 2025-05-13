@@ -13,10 +13,11 @@ from .serializers import UserSerializer
 
 class UserListCreateView(APIView):
     permission_classes = (AllowAny,)
+    serializer_class = UserSerializer
     # 1. GET - Barcha user larni olish
     def get(self, request):
         user = User.objects.all()
-        serializer = UserSerializer(user, many=True)
+        serializer = self.serializer_class(user, many=True)
         return Response(serializer.data)
 
     # 2. POST - Yangi user yaratish
@@ -26,7 +27,7 @@ class UserListCreateView(APIView):
         responses={201: UserSerializer},
     )
     def post(self, request):
-        serializer = UserSerializer(data=request.data)
+        serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         try:
@@ -47,10 +48,11 @@ class UserListCreateView(APIView):
 
 
 class UserDestroyUpdatePatchDeleteAPIView(APIView):
+    serializer_class = UserSerializer
     # 1. GET - Bitta user ni olish
     def get(self, request, user_id):
         user = User.objects.get(id=user_id)
-        serializer = UserSerializer(user)
+        serializer = self.serializer_class(user)
         return Response(serializer.data)
 
     # 2. PUT - To'liq yangilash (barcha maydonlar talab qilinadi)
@@ -61,7 +63,7 @@ class UserDestroyUpdatePatchDeleteAPIView(APIView):
     def put(self, request, user_id):
         try:
             user = User.objects.get(id=user_id)
-            serializer = UserSerializer(user, data=request.data)
+            serializer = self.serializer_class(user, data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data)
@@ -73,7 +75,7 @@ class UserDestroyUpdatePatchDeleteAPIView(APIView):
     def patch(self, request, user_id):
         try:
             user = User.objects.get(id=user_id)
-            serializer = UserSerializer(user, data=request.data, partial=True)
+            serializer = self.serializer_class(user, data=request.data, partial=True)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data)
@@ -89,6 +91,7 @@ class UserDestroyUpdatePatchDeleteAPIView(APIView):
 
 
 class PaymentView(APIView):
+    serializer_class = PaymentSerializer
     @extend_schema(
         request=PaymentSerializer,
         responses={
@@ -98,7 +101,7 @@ class PaymentView(APIView):
         },
     )
     def post(self, request):
-        serializer = PaymentSerializer(data=request.data)
+        serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         try:
