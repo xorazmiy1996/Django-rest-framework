@@ -8,6 +8,6 @@ CMD gunicorn \
   --bind=0.0.0.0:8000 \
   --workers 8 \
   --worker-class gevent \
-  --worker-connections 100 \
+  --worker-connections 500 \
   --timeout 0 \
   tutorial.wsgi:application
