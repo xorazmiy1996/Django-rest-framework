@@ -23,9 +23,36 @@
    - `http://127.0.0.1:8000/users/` - **x-latency: `0.044 seconds`**
    - `http://127.0.0.1:8000/payment/` - **x-latency: `0.049 seconds`**
 4. `Django-REST-Framework` loyihasini va `PostgreSQL` ni bita serverda local bog'lanish orqali run qilganimda.(`Server` harakteristikasi yuqoridagi serverlar bilan bir hil)
-   - `http://35.194.106.39:8000/token/` - **x-latency: `0.574 seconds`**
+   - `http://35.194.106.39:8000/token/` - **x-latency: `0.524 seconds`**
    - `http://35.194.106.39:8000/users/` - **x-latency: `0.024 seconds`**
    - `http://35.194.106.39:8000/payment/` - **x-latency: `0.030 seconds`**
+   -  **PostgreSql-config:**
+       - max_connections = 100
+       - shared_buffers = 128MB 
+       - #effective_cache_size = 4 GB
+       - #maintenance_work_mem = 64MB
+       - #checkpoint_completion_target = 0.9 
+       - #wal_buffers = -1 
+       - #default_statistics_target = 100 
+       - #random_page_cost = 4.0 
+       - #effective_io_concurrency = 1 
+       - #work_mem = 4MB   
+       - #huge_pages = try  
+       - max_wal_size = 1GB
+       - min_wal_size = 80MB 
+       - #max_worker_processes = 8
+       - #max_logical_replication_workers = 4 
+       - #max_parallel_workers_per_gather = 2 
+       - #max_parallel_workers = 8
+       - #max_parallel_maintenance_workers = 2
+ 
+   - Locust:
+     ![](images/locust_4.png)
+
+Serverdagi yuklanma
+![Serverdagi yuklanma](images/server-yuklama.png)
+
+
 
 
 **Mening kompyuterimning Konfiguratsiyasi uchun optimal `Latency`:**
