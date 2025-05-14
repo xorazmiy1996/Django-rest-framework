@@ -5,9 +5,9 @@ RUN pip install --no-cache-dir  --upgrade -r requirements.txt
 RUN apk update && apk add curl
 COPY . .
 CMD gunicorn \
+  --workers=8 \
+  --worker-class=gevent \
+  --worker-connections=1000 \
   --bind=0.0.0.0:8000 \
-  --workers 8 \
-  --worker-class gevent \
-  --worker-connections 500 \
-  --timeout 0 \
+  --timeout=120 \
   tutorial.wsgi:application
