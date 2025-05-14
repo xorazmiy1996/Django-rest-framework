@@ -102,8 +102,6 @@ DATABASES = {
         'CONN_MAX_AGE': 0,  # Gevent uchun 0 yaxshi
         'OPTIONS': {
             'options': '-c search_path=public',  # Schema ni aniq belgilash
-            'DISABLE_SERVER_SIDE_CURSORS': True,  # PostgreSQL uchun
-
         },
     }
 }
