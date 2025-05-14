@@ -6,7 +6,7 @@ RUN apk update && apk add curl
 COPY . .
 CMD gunicorn \
   --bind=0.0.0.0:8000 \
-  --workers 9 \
+  --workers 16 \
   --threads 4 \
   --worker-class gevent \
   --timeout 25 \
