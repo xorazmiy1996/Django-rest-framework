@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-s5t4fnp$rulg24^v1v@x)u0@5583lb%jt%jg-b7*k$-s^lb*cr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-# ALLOWED_HOSTS = ['localhost','127.0.0.1']
+ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
-ALLOWED_HOSTS = ['35.194.106.39','test-uchun.uz']
+# ALLOWED_HOSTS = ['35.194.106.39','test-uchun.uz']
 
 # Application definition
 
@@ -89,33 +89,33 @@ WSGI_APPLICATION = 'tutorial.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-load_dotenv()
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('POSTGRES_DB'),
-        'USER': os.getenv('POSTGRES_USER'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': os.getenv('POSTGRES_HOST'),
-        'PORT': '5432',
-        # Qo'shimcha sozlamalar
-        'OPTIONS': {
-            'options': '-c search_path=public'  # Schema ni aniq belgilash
-        },
-    }
-}
-
-# local postgres uchun
+# load_dotenv()
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'rest_framework_db',
-#         'USER': 'test',
-#         'PASSWORD': '123',
-#         'HOST': 'localhost',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': os.getenv('POSTGRES_DB'),
+#         'USER': os.getenv('POSTGRES_USER'),
+#         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+#         'HOST': os.getenv('POSTGRES_HOST'),
 #         'PORT': '5432',
+#         # Qo'shimcha sozlamalar
+#         'OPTIONS': {
+#             'options': '-c search_path=public'  # Schema ni aniq belgilash
+#         },
 #     }
 # }
+
+# local postgres uchun
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'rest_framework_db',
+        'USER': 'test',
+        'PASSWORD': '123',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
