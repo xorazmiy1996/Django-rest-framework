@@ -6,8 +6,8 @@ RUN apk update && apk add curl
 COPY . .
 CMD gunicorn \
   --bind=0.0.0.0:8000 \
-  --workers 16 \
-  --threads 4 \
+  --workers 8 \
   --worker-class gevent \
-  --timeout 25 \
+  --worker-connections 100 \
+  --timeout 0 \
   tutorial.wsgi:application
