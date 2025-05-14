@@ -100,7 +100,7 @@ class PaymentView(APIView):
             404: {"description": "User balance not found"}
         },
     )
-    def post(self, request):
+    async def post(self, request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
 
