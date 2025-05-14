@@ -102,7 +102,6 @@ DATABASES = {
 
         'OPTIONS': {
             'options': '-c search_path=public',  # Schema ni aniq belgilash
-            'CONN_MAX_AGE': 0,  # Gevent uchun 0 yaxshi
         },
     }
 }
