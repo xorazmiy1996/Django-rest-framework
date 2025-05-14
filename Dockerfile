@@ -5,7 +5,7 @@ RUN pip install --no-cache-dir  --upgrade -r requirements.txt
 RUN apk update && apk add curl
 COPY . .
 
-CMD gunicorn app.tornado_app:application --worker-class tornado.GeventWorker --bind 0.0.0.0:8000
+CMD gunicorn user.tornado_app:application --worker-class tornado.GeventWorker --bind 0.0.0.0:8000
 
 #CMD gunicorn \
 #  --bind=0.0.0.0:8000 \
