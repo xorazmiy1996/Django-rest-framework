@@ -17,7 +17,7 @@ COPY . .
 CMD gunicorn \
   --bind=0.0.0.0:8000 \
   --workers 9 \
-  --threads 4 \
+  --max-requests 1000 \
   --worker-class gevent \
   --max-requests 1000 \
   --timeout 120 \
