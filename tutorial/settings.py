@@ -100,8 +100,6 @@ DATABASES = {
         'PORT': '5432',
         'OPTIONS': {
         'options': '-c search_path=public',  # Schema ni aniq belgilash
-            'connect_timeout': 5,  # 5 soniya
-
         },
     }
 }
