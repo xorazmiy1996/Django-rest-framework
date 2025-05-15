@@ -12,8 +12,7 @@ CMD gunicorn \
   --timeout=60 \
   --keep-alive=5 \
   --max-requests=1000 \
-  --max-requests-jitter=50 \
-  tutorial.wsgi:applica
+  --max-requests-jitter=50 tutorial.wsgi:applica
 
 
 
