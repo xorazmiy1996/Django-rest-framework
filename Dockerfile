@@ -6,6 +6,7 @@ RUN apk update && apk add curl
 COPY . .
 CMD gunicorn \
   --workers 17 \
+  --thread 50 \
   --worker-class gevent \
   --max-requests 1000 \
   --bind=0.0.0.0:8000 \
