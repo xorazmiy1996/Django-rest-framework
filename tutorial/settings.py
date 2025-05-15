@@ -98,10 +98,10 @@ DATABASES = {
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         'HOST': os.getenv('POSTGRES_HOST'),
         'PORT': '5432',
-        # Qo'shimcha sozlamalar
-
         'OPTIONS': {
-            'options': '-c search_path=public',  # Schema ni aniq belgilash
+        'options': '-c search_path=public',  # Schema ni aniq belgilash
+            'connect_timeout': 5,  # 5 soniya
+
         },
     }
 }

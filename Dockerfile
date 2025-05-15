@@ -13,4 +13,51 @@ CMD gunicorn \
   --keep-alive=5 \
   --max-requests=500 \
   --max-requests-jitter=50 \
-  tutorial.wsgi:application
+  tutorial.wsgi:applica
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
