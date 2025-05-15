@@ -15,10 +15,11 @@ COPY . .
 
 # Gunicorn bilan ishga tushirish, gevent worker-classini qo'shing
 CMD gunicorn \
-  --bind=0.0.0.0:8000 \
-  --workers 9 \
-  --max-requests 1000 \
+  --workers 17 \
   --worker-class gevent \
   --max-requests 1000 \
+  --bind=0.0.0.0:8000 \
   --timeout 120 \
+  --keep-alive=5 \
+  --max-requests-jitter=100 \
   tutorial.wsgi:application
