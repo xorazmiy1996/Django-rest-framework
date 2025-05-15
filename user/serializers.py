@@ -1,9 +1,8 @@
-from .models import UserBalance
+from .models import User, UserBalance, Transaction
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import User
+from .models import User  # User modelini import qiling
 from drf_spectacular.utils import extend_schema_serializer, OpenApiExample
-from django.core.validators import MinValueValidator
 
 
 class UserSerializer(serializers.Serializer):
@@ -86,15 +85,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     ]
 )
 class PaymentSerializer(serializers.Serializer):
-    amount = serializers.DecimalField(
-        max_digits=12,
-        decimal_places=2,
-        validators=[
-            MinValueValidator(0.01, message="To'lov miqdori 0 dan katta bo'lishi kerak"),
-            # Qo'shimcha validatorlar...
-        ]
-    )
-
+    amount = serializers.DecimalField(max_digits=12, decimal_places=2, min_value=0.01,
+                                      help_text="To'lov miqdori (minimal 100)")
     description = serializers.CharField(max_length=255, required=False, help_text="To'lov haqida qo'shimcha ma'lumot")
 
-
+    def validate_amount(self, value):
+        if value <= 0:
+            raise serializers.ValidationError("To'lov miqdori 0 dan katta bo'lishi kerak")
+        return value

@@ -1,5 +1,3 @@
-from rest_framework.permissions import AllowAny
-
 from .models import User, UserBalance, Transaction
 from .serializers import PaymentSerializer
 from django.db import transaction
@@ -12,12 +10,10 @@ from .serializers import UserSerializer
 
 
 class UserListCreateView(APIView):
-    permission_classes = (AllowAny,)
-    serializer_class = UserSerializer
     # 1. GET - Barcha user larni olish
     def get(self, request):
         user = User.objects.all()
-        serializer = self.serializer_class(user, many=True)
+        serializer = UserSerializer(user, many=True)
         return Response(serializer.data)
 
     # 2. POST - Yangi user yaratish
@@ -27,7 +23,7 @@ class UserListCreateView(APIView):
         responses={201: UserSerializer},
     )
     def post(self, request):
-        serializer = self.serializer_class(data=request.data)
+        serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         try:
@@ -48,11 +44,10 @@ class UserListCreateView(APIView):
 
 
 class UserDestroyUpdatePatchDeleteAPIView(APIView):
-    serializer_class = UserSerializer
     # 1. GET - Bitta user ni olish
     def get(self, request, user_id):
         user = User.objects.get(id=user_id)
-        serializer = self.serializer_class(user)
+        serializer = UserSerializer(user)
         return Response(serializer.data)
 
     # 2. PUT - To'liq yangilash (barcha maydonlar talab qilinadi)
@@ -63,7 +58,7 @@ class UserDestroyUpdatePatchDeleteAPIView(APIView):
     def put(self, request, user_id):
         try:
             user = User.objects.get(id=user_id)
-            serializer = self.serializer_class(user, data=request.data)
+            serializer = UserSerializer(user, data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data)
@@ -75,7 +70,7 @@ class UserDestroyUpdatePatchDeleteAPIView(APIView):
     def patch(self, request, user_id):
         try:
             user = User.objects.get(id=user_id)
-            serializer = self.serializer_class(user, data=request.data, partial=True)
+            serializer = UserSerializer(user, data=request.data, partial=True)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data)
@@ -91,27 +86,20 @@ class UserDestroyUpdatePatchDeleteAPIView(APIView):
 
 
 class PaymentView(APIView):
-    serializer_class = PaymentSerializer
     @extend_schema(
         request=PaymentSerializer,
-        responses={
-            200: PaymentSerializer,
-            400: {"description": "Invalid input"},
-            404: {"description": "User balance not found"}
-        },
+        responses={200: PaymentSerializer},
     )
     def post(self, request):
-        serializer = self.serializer_class(data=request.data)
+        serializer = PaymentSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         try:
             with transaction.atomic():
                 # Balansni yangilash
-                user_balance = UserBalance.objects.select_for_update().only(
-                    'main_balance'
-                ).get(user_id=request.user.id)
+                user_balance = UserBalance.objects.select_for_update().get(user=request.user)
                 user_balance.main_balance += serializer.validated_data['amount']
-                user_balance.save(update_fields=['main_balance'])
+                user_balance.save()
 
                 # Tranzaksiyani yaratish
                 Transaction.objects.create(
