@@ -18,7 +18,7 @@ CMD gunicorn \
   --bind=0.0.0.0:8000 \
   --workers 9 \
   --threads 4 \
-  --worker-class gevent \  # gevent worker-classi
+  --worker-class gevent \
   --max-requests 1000 \
   --timeout 25 \
   tutorial.wsgi:application
