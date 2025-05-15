@@ -80,6 +80,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tutorial.wsgi.application'
 
+# Database
+# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 load_dotenv()
 DATABASES = {
     'default': {
@@ -89,10 +98,10 @@ DATABASES = {
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         'HOST': os.getenv('POSTGRES_HOST'),
         'PORT': '5432',
+        # Qo'shimcha sozlamalar
         'CONN_MAX_AGE': 0,  # Gevent uchun 0 yaxshi
         'OPTIONS': {
-        'options': '-c search_path=public',  # Schema ni aniq belgilash
-        'DISABLE_SERVER_SIDE_CURSORS': True,
+            'options': '-c search_path=public',  # Schema ni aniq belgilash
         },
     }
 }
@@ -106,9 +115,6 @@ DATABASES = {
 #         'PASSWORD': '123',
 #         'HOST': 'localhost',
 #         'PORT': '5432',
-#         'OPTIONS': {
-#         'options': '-c search_path=public',  # Schema ni aniq belgilash
-#         },
 #     }
 # }
 
