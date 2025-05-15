@@ -20,5 +20,5 @@ CMD gunicorn \
   --threads 4 \
   --worker-class gevent \
   --max-requests 1000 \
-  --timeout 25 \
+  --timeout 120 \
   tutorial.wsgi:application
