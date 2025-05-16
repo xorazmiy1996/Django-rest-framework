@@ -3,22 +3,32 @@ from rest_framework.permissions import AllowAny
 from .models import User, UserBalance, Transaction
 from .serializers import PaymentSerializer
 from django.db import transaction
-from drf_spectacular.utils import extend_schema, OpenApiExample
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
 from .serializers import UserSerializer
-
+from .pagination import CustomPagination
 
 class UserListCreateView(APIView):
     permission_classes = (AllowAny,)
     serializer_class = UserSerializer
-    # 1. GET - Barcha user larni olish
+    pagination_class = CustomPagination
+
+    @extend_schema(
+        parameters=[
+            OpenApiParameter('page', int, description='Sahifa raqami', required=False),
+            OpenApiParameter('page_size', int, description='Sahifadagi elementlar soni', required=False),
+        ],
+        responses={200: UserSerializer(many=True)},
+    )
     def get(self, request):
         user = User.objects.all()
-        serializer = self.serializer_class(user, many=True)
-        return Response(serializer.data)
+        paginator = self.pagination_class()  # Pagination klassini chaqirish
+        paginated_users = paginator.paginate_queryset(user, request)  # Pagination
+        serializer = self.serializer_class(paginated_users, many=True)
+        return paginator.get_paginated_response(serializer.data)
 
     # 2. POST - Yangi user yaratish
 
