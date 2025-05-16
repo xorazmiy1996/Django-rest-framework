@@ -1,6 +1,6 @@
 import time
-from django.contrib.auth.models import User
-from django.db import IntegrityError, DatabaseError
+from user.models import User
+from django.db import IntegrityError, DatabaseError, transaction
 
 
 def create_users(num_users):
