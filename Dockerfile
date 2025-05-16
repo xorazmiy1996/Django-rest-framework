@@ -8,7 +8,7 @@ CMD gunicorn \
   --workers 9 \
   --thread 50 \
   --worker-class gevent \
-  --worker_connections 2000 \
+  --max-requests 5000 \
   --bind=0.0.0.0:8000 \
   --timeout 90 \
   --keep-alive 5 \
